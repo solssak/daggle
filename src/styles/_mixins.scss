@@ -1,0 +1,20 @@
+// 웹 (1025px 이상)
+@mixin respond-to-web() {
+  @media (min-width: $breakpoints-web) {
+    @content;
+  }
+}
+
+// 태블릿 (642px ~ 1024px)
+@mixin respond-to-tablet() {
+  @media (min-width: $breakpoints-tablet) and (max-width: ($breakpoints-web - 1)) {
+    @content;
+  }
+}
+
+// 모바일 (360px ~ 641px)
+@mixin respond-to-mobile() {
+  @media (min-width: $breakpoints-mobile-min) and (max-width: ($breakpoints-tablet - 1)) {
+    @content;
+  }
+}
