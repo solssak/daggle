@@ -16,6 +16,7 @@
     border-radius: 12px;
     padding: 40px 32px;
     min-width: 454px;
+    border: 1px solid #eeeff1;
 
     @include respond-to-mobile {
       min-width: 100%;
