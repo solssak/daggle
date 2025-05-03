@@ -16,7 +16,6 @@
     border-radius: 12px;
     padding: 40px 32px;
     min-width: 454px;
-    max-height: 413px;
 
     @include respond-to-mobile {
       min-width: 100%;
@@ -49,6 +48,8 @@
 
         &__inputWrapper {
           width: 100%;
+          position: relative;
+          padding-bottom: 20px;
         }
 
         &__input {
@@ -60,9 +61,21 @@
           outline: none;
           transition: border 0.2s;
 
+          &__error {
+            border: 1px solid #d11111;
+          }
+
           &::placeholder {
             color: #a7a9b4;
           }
+        }
+
+        &__errorMessage {
+          color: #d11111;
+          @include typography(Subtitle-S);
+          position: absolute;
+          left: 16px;
+          bottom: -5px;
         }
       }
     }
