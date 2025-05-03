@@ -3,7 +3,7 @@
 import Button from '@/features/ui/Button/Button';
 import { useLogin } from '@/globalState/tanstackQueryHooks/Login';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
 export default function Auth() {
@@ -13,6 +13,14 @@ export default function Auth() {
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const router = useRouter();
   const { mutate } = useLogin();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (accessToken && refreshToken) {
+      router.replace('/');
+    }
+  }, [router]);
 
   const handleLogin = async () => {
     const idValid = !!id;
