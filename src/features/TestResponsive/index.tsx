@@ -1,4 +1,4 @@
-import Button from '@/ui/Button/Button';
+import Button from '@/features/ui/Button/Button';
 import styles from './index.module.scss';
 
 export default function TestResponsive() {
