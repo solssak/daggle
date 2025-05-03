@@ -14,7 +14,7 @@
 
 // 모바일 (360px ~ 641px)
 @mixin respond-to-mobile() {
-  @media (min-width: $breakpoints-mobile-min) and (max-width: ($breakpoints-tablet - 1)) {
+  @media (min-width: $breakpoints-mobile) and (max-width: ($breakpoints-tablet - 1)) {
     @content;
   }
 }
