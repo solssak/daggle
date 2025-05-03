@@ -1,5 +1,6 @@
+import CommonHead from '@/features/modules/CommonHead/CommonHead';
 import '@/styles/globals.css';
-import Header from '@/ui/Header/header';
+import Header from '@/features/ui/Header/Header';
 
 export default function RootLayout({
   children,
@@ -8,6 +9,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <CommonHead />
+      </head>
       <body>
         <Header />
         {children}

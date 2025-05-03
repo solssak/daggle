@@ -16,6 +16,9 @@
   display: revert;
 }
 
+body {
+  font-family: 'Pretendard Variable', sans-serif;
+}
 /* Preferred box-sizing value */
 *,
 *::before,
