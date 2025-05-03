@@ -1,0 +1,23 @@
+@mixin typography($type) {
+  @if $type == H1-l {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 160%;
+    letter-spacing: -1.5%;
+  } @else if $type == Subtitle-L {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 0;
+  } @else if $type == Subtitle-M {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.3%;
+  } @else if $type == Body-2 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.3%;
+  }
+}
