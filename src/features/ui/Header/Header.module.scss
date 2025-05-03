@@ -8,6 +8,7 @@
     align-items: center;
     margin: 0 auto;
     padding: 24px 0;
+
     @include respond-to-web {
       max-width: 1200px;
     }
@@ -16,6 +17,18 @@
     }
     @include respond-to-mobile {
       max-width: 360px;
+    }
+
+    &__logo {
+      padding: 6px 0;
+    }
+  }
+
+  &__isLogin {
+    &__button {
+      &__login {
+        @include typography(H7);
+      }
     }
   }
 }
