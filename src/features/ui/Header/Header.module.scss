@@ -1,4 +1,8 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
   width: 100%;
   box-shadow: 0px 9px 10px 0px rgba(232, 232, 232, 0.25);
 
@@ -8,6 +12,7 @@
     align-items: center;
     margin: 0 auto;
     padding: 24px 0;
+
     @include respond-to-web {
       max-width: 1200px;
     }
@@ -16,6 +21,18 @@
     }
     @include respond-to-mobile {
       max-width: 360px;
+    }
+
+    &__logo {
+      padding: 6px 0;
+    }
+  }
+
+  &__isLogin {
+    &__button {
+      &__login {
+        @include typography(H7);
+      }
     }
   }
 }
