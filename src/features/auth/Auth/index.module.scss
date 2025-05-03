@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9fafa;
+
+  @include respond-to-mobile {
+    background-color: #ffffff;
+    height: auto;
+  }
+
+  &__wrapper {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 40px 32px;
+    min-width: 454px;
+    max-height: 413px;
+
+    @include respond-to-mobile {
+      min-width: 100%;
+      max-height: 100%;
+      padding: 20px $padding-mobile;
+    }
+
+    &__title {
+      @include typography(H1-l);
+
+      &__purple {
+        color: #320397;
+      }
+    }
+
+    &__subtitle {
+      @include typography(Subtitle-L);
+      color: #a7a9b4;
+    }
+
+    &__formWrapper {
+      background: none;
+      margin-top: 0;
+
+      &__form {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+        gap: 12px;
+
+        &__inputWrapper {
+          width: 100%;
+        }
+
+        &__input {
+          width: 100%;
+          padding: 12px 16px;
+          border: 1px solid #ededed;
+          border-radius: 10px;
+          @include typography(Body-2);
+          outline: none;
+          transition: border 0.2s;
+
+          &::placeholder {
+            color: #a7a9b4;
+          }
+        }
+      }
+    }
+  }
+}
