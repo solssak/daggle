@@ -1,0 +1,22 @@
+.container {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 32px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px;
+
+    &__title {
+      @include typography(H1-M);
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+}

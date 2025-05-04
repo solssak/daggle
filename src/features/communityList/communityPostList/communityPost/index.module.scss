@@ -1,0 +1,73 @@
+.container {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 24px;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__title {
+      flex: 1;
+      @include typography(Body-1);
+      color: #000;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &__date {
+        color: #a7a9b4;
+        @include typography(Body-2);
+      }
+
+      &__item {
+        &__comment {
+          display: flex;
+          align-items: center;
+
+          &__count {
+            @include typography(Body-2);
+            color: #bdbdbd;
+            font-size: 16px;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.skeletonTitle {
+  width: 60%;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.skeletonDate,
+.skeletonComment,
+.skeletonProfile {
+  display: inline-block;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+.skeletonDate {
+  width: 80px;
+  height: 18px;
+  margin-right: 16px;
+}
+.skeletonComment {
+  width: 40px;
+  height: 18px;
+  margin-right: 16px;
+}
+.skeletonProfile {
+  width: 24px;
+  height: 24px;
+}
