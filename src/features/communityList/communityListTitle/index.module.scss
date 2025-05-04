@@ -1,0 +1,16 @@
+.container {
+  &__subtitle {
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 12px;
+    @include typography(H1-S);
+    color: #5e616e;
+  }
+
+  &__title {
+    @include typography(H1-l);
+    color: #000000;
+    text-align: center;
+    padding-bottom: 40px;
+  }
+}
