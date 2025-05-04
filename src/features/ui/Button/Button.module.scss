@@ -10,6 +10,7 @@
   letter-spacing: -0.03%;
   cursor: pointer;
   padding: 14px 24px;
+  word-break: keep-all;
 
   &--variant-grayscale1 {
     background: #000000;
@@ -24,6 +25,7 @@
   &--variant-purple {
     background: #6025e1;
     padding: 12px 24px;
+    @include typography(Body-2);
     &:hover {
       background: #320397;
     }
