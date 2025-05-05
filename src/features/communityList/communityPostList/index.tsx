@@ -1,19 +1,32 @@
 'use client';
 
-import { useState } from 'react';
 import Button from '@/features/ui/Button/Button';
-import styles from './index.module.scss';
 import { useGetCommunityList } from '@/globalState/tanstackQueryHooks/communityList';
+import { useState } from 'react';
 import CommunityPost from './communityPost';
+import styles from './index.module.scss';
 import PageSelector from './pageSelector';
+import { useRouter } from 'next/navigation';
 
 export default function CommunityPostList() {
   const [page, setPage] = useState<number>(1);
   const limit = 10;
   const { data } = useGetCommunityList(page, limit);
+  const router = useRouter();
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
+  };
+
+  const handleWriteClick = () => {
+    const accessToken =
+      typeof window !== 'undefined' && localStorage.getItem('accessToken');
+
+    if (accessToken) {
+      router.push('/post/write');
+    } else {
+      router.push('/auth');
+    }
   };
 
   return (
@@ -21,7 +34,9 @@ export default function CommunityPostList() {
       {/* 게시판 헤더 */}
       <div className={styles.container__header}>
         <span className={styles.container__header__title}>게시판</span>
-        <Button variant="purple">글쓰기</Button>
+        <Button variant="purple" onClick={handleWriteClick}>
+          글쓰기
+        </Button>
       </div>
       {/* 게시판 목록 */}
       <ul className={styles.container__list}>

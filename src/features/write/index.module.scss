@@ -1,0 +1,35 @@
+.container {
+  background-color: #f9fafa;
+  min-height: 100vh;
+  padding: 24px 120px;
+
+  @include respond-to-tablet {
+    padding: 24px 30px;
+  }
+
+  @include respond-to-mobile {
+    padding: 24px 16px;
+  }
+
+  &__wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 24px 24px 24px 24px;
+    background-color: #fff;
+    border: 1px solid #eeeff1;
+    border-radius: 16px;
+
+    &__title {
+      @include typography(H1-R);
+      margin-bottom: 24px;
+    }
+
+    &__form {
+      @include typography(Body-2);
+    }
+  }
+
+  &__button {
+    margin: 28px auto 0 auto;
+  }
+}

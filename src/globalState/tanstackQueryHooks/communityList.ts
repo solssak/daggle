@@ -1,5 +1,9 @@
 import { queryKeys } from '@/constants/query.keys';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+} from '@tanstack/react-query';
 import { fetcher } from '@/lib/tanstackQuery/fetcher';
 import { post } from '@/lib/tanstackQuery/post';
 
@@ -77,4 +81,16 @@ export const useCreateCommunityPostComment = (id: string) => {
     post<CommunityPostComment>(`api/posts/${id}/comments`, { content });
 
   return useMutation({ mutationFn: api });
+};
+export const useCreateCommunityPost = (
+  options?: UseMutationOptions<
+    CommunityPost,
+    Error,
+    { title: string; content: string }
+  >,
+) => {
+  const api = ({ title, content }: { title: string; content: string }) =>
+    post<CommunityPost>('api/posts', { title, content });
+
+  return useMutation({ mutationFn: api, ...options });
 };
