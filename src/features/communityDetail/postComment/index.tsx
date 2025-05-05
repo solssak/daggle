@@ -21,6 +21,8 @@ export default function PostComment({ comments }: CommentProps) {
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState<string>('');
   const { id } = useParams();
+  const myUserId =
+    typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
 
   const { mutate: createComment } = useCreateCommunityPostComment(id as string);
   const { mutate: deleteComment } = useDeleteCommunityPostComment(id as string);
@@ -52,50 +54,52 @@ export default function PostComment({ comments }: CommentProps) {
                 />
                 {comment.user.nickname || '익명유저'}
               </div>
-              <div className={styles.container__comment__actions}>
-                {editingCommentId === comment.id ? (
-                  <>
-                    <button
-                      className={styles.container__comment__actions__save}
-                      onClick={() => {
-                        updateComment({
-                          commentId: comment.id,
-                          content: editContent,
-                        });
-                        setEditingCommentId(null);
-                        setEditContent('');
-                      }}
-                    >
-                      저장
-                    </button>
-                    <button
-                      className={styles.container__comment__actions__cancel}
-                      onClick={handleCancelEdit}
-                    >
-                      취소
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className={styles.container__comment__actions__edit}
-                      onClick={() => handleEditClick(comment)}
-                    >
-                      수정
-                    </button>
-                    <button
-                      className={styles.container__comment__actions__delete}
-                      onClick={() => {
-                        if (confirm('댓글을 삭제하시겠습니까?')) {
-                          deleteComment(comment.id);
-                        }
-                      }}
-                    >
-                      삭제
-                    </button>
-                  </>
-                )}
-              </div>
+              {comment.user.id === myUserId && (
+                <div className={styles.container__comment__actions}>
+                  {editingCommentId === comment.id ? (
+                    <>
+                      <button
+                        className={styles.container__comment__actions__save}
+                        onClick={() => {
+                          updateComment({
+                            commentId: comment.id,
+                            content: editContent,
+                          });
+                          setEditingCommentId(null);
+                          setEditContent('');
+                        }}
+                      >
+                        저장
+                      </button>
+                      <button
+                        className={styles.container__comment__actions__cancel}
+                        onClick={handleCancelEdit}
+                      >
+                        취소
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className={styles.container__comment__actions__edit}
+                        onClick={() => handleEditClick(comment)}
+                      >
+                        수정
+                      </button>
+                      <button
+                        className={styles.container__comment__actions__delete}
+                        onClick={() => {
+                          if (confirm('댓글을 삭제하시겠습니까?')) {
+                            deleteComment(comment.id);
+                          }
+                        }}
+                      >
+                        삭제
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
             {editingCommentId === comment.id ? (
               <textarea
