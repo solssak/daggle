@@ -2,7 +2,7 @@
 
 import Button from '../ui/Button/Button';
 import styles from './index.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TitleInput from './titleInput';
 import ContentTextarea from './contentTextarea';
 import { useCreateCommunityPost } from '@/globalState/tanstackQueryHooks/communityList';
@@ -14,8 +14,17 @@ export default function Write() {
   const [titleError, setTitleError] = useState<boolean>(false);
   const [contentError, setContentError] = useState<boolean>(false);
   const maxContentLength = 300;
-
   const router = useRouter();
+
+  useEffect(() => {
+    const accessToken =
+      typeof window !== 'undefined' && localStorage.getItem('accessToken');
+
+    if (!accessToken) {
+      router.replace('/auth');
+    }
+  }, [router]);
+
   const { mutate: createCommunityPost } = useCreateCommunityPost({
     onSuccess: (data) => {
       router.push(`/post/${data.id}`);
