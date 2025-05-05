@@ -37,6 +37,7 @@ export default function Auth() {
         onSuccess: (data) => {
           localStorage.setItem('accessToken', data.tokens.accessToken);
           localStorage.setItem('refreshToken', data.tokens.refreshToken);
+          localStorage.setItem('userId', data.user.id);
           router.replace('/');
         },
         onError: (error) => {
