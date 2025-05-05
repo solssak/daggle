@@ -1,0 +1,70 @@
+'use client';
+
+import Button from '../ui/Button/Button';
+import styles from './index.module.scss';
+import { useState } from 'react';
+import TitleInput from './titleInput';
+import ContentTextarea from './contentTextarea';
+import { useCreateCommunityPost } from '@/globalState/tanstackQueryHooks/communityList';
+import { useRouter } from 'next/navigation';
+
+export default function Write() {
+  const [content, setContent] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [titleError, setTitleError] = useState<boolean>(false);
+  const [contentError, setContentError] = useState<boolean>(false);
+  const maxContentLength = 300;
+
+  const router = useRouter();
+  const { mutate: createCommunityPost } = useCreateCommunityPost({
+    onSuccess: (data) => {
+      router.push(`/post/${data.id}`);
+    },
+    onError: (error) => {
+      alert(error.message);
+    },
+  });
+
+  const handleSubmit = () => {
+    let hasError = false;
+    if (title.trim().length < 1) {
+      setTitleError(true);
+      hasError = true;
+    } else {
+      setTitleError(false);
+    }
+    if (content.trim().length < 5) {
+      setContentError(true);
+      hasError = true;
+    } else {
+      setContentError(false);
+    }
+    if (hasError) return;
+
+    createCommunityPost({ title, content });
+  };
+
+  return (
+    <section className={styles.container}>
+      <div className={styles.container__wrapper}>
+        <h1 className={styles.container__wrapper__title}>게시글 작성</h1>
+        <form className={styles.container__wrapper__form}>
+          <TitleInput value={title} onChange={setTitle} hasError={titleError} />
+          <ContentTextarea
+            value={content}
+            onChange={setContent}
+            hasError={contentError}
+            maxLength={maxContentLength}
+          />
+        </form>
+      </div>
+      <Button
+        className={styles.container__button}
+        size="lg"
+        onClick={handleSubmit}
+      >
+        등록하기
+      </Button>
+    </section>
+  );
+}

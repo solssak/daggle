@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+
+  &__wrapper {
+    position: relative;
+    border: 1px solid #eeeff1;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+
+    &__error {
+      border: 1px solid #d11111;
+      margin-bottom: 45px;
+    }
+
+    &__input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font: inherit;
+      &::placeholder {
+        color: #c8c9d0;
+      }
+    }
+
+    &__errorMessage {
+      position: absolute;
+      color: #d11111;
+      font-size: 13px;
+      left: 0px;
+      bottom: -28px;
+      margin-top: 8px;
+      pointer-events: none;
+      background: #fff;
+      padding: 0 4px;
+    }
+  }
+}
