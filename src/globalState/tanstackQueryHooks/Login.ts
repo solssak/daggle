@@ -7,6 +7,15 @@ type LoginResponse = {
     accessToken: string;
     refreshToken: string;
   };
+  user: {
+    loginId: string;
+    profileImageUrl: string;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string;
+    id: string;
+    nickname: string;
+  };
 };
 
 export const useLogin = () => {

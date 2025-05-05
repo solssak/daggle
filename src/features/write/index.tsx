@@ -5,8 +5,11 @@ import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
 import TitleInput from './titleInput';
 import ContentTextarea from './contentTextarea';
-import { useCreateCommunityPost } from '@/globalState/tanstackQueryHooks/communityList';
-import { useRouter } from 'next/navigation';
+import {
+  useCreateCommunityPost,
+  useGetCommunityPost,
+} from '@/globalState/tanstackQueryHooks/communityList';
+import { useParams, useRouter } from 'next/navigation';
 
 export default function Write() {
   const [content, setContent] = useState<string>('');
@@ -15,6 +18,14 @@ export default function Write() {
   const [contentError, setContentError] = useState<boolean>(false);
   const maxContentLength = 300;
   const router = useRouter();
+  const params = useParams();
+  const postId = params?.id as string;
+  const isEditPage = !!postId;
+
+  const { data: post } = useGetCommunityPost(postId);
+
+  const isContentChanged =
+    isEditPage && post && (title !== post.title || content !== post.content);
 
   useEffect(() => {
     const accessToken =
@@ -24,6 +35,13 @@ export default function Write() {
       router.replace('/auth');
     }
   }, [router]);
+
+  useEffect(() => {
+    if (isEditPage && post) {
+      setTitle(post.title);
+      setContent(post.content);
+    }
+  }, [isEditPage, post]);
 
   const { mutate: createCommunityPost } = useCreateCommunityPost({
     onSuccess: (data) => {
@@ -56,7 +74,9 @@ export default function Write() {
   return (
     <section className={styles.container}>
       <div className={styles.container__wrapper}>
-        <h1 className={styles.container__wrapper__title}>게시글 작성</h1>
+        <h1 className={styles.container__wrapper__title}>
+          {isEditPage ? '게시글 수정' : '게시글 작성'}
+        </h1>
         <form className={styles.container__wrapper__form}>
           <TitleInput value={title} onChange={setTitle} hasError={titleError} />
           <ContentTextarea
@@ -71,8 +91,9 @@ export default function Write() {
         className={styles.container__button}
         size="lg"
         onClick={handleSubmit}
+        disabled={isEditPage && !isContentChanged}
       >
-        등록하기
+        {isEditPage ? '수정하기' : '등록하기'}
       </Button>
     </section>
   );

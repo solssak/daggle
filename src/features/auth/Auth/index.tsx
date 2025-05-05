@@ -2,6 +2,7 @@
 
 import Button from '@/features/ui/Button/Button';
 import { useLogin } from '@/globalState/tanstackQueryHooks/Login';
+import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
@@ -13,6 +14,7 @@ export default function Auth() {
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const router = useRouter();
   const { mutate } = useLogin();
+  const setUserId = useMyInfoStore((state) => state.setUserId);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
@@ -37,6 +39,7 @@ export default function Auth() {
         onSuccess: (data) => {
           localStorage.setItem('accessToken', data.tokens.accessToken);
           localStorage.setItem('refreshToken', data.tokens.refreshToken);
+          setUserId(data.user.id);
           router.replace('/');
         },
         onError: (error) => {

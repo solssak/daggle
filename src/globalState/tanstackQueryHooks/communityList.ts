@@ -1,11 +1,14 @@
+import { apiCaller } from '@/apis';
 import { queryKeys } from '@/constants/query.keys';
+import { fetcher } from '@/lib/tanstackQuery/fetcher';
+import { patch } from '@/lib/tanstackQuery/patch';
+import { post } from '@/lib/tanstackQuery/post';
 import {
   useMutation,
   UseMutationOptions,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query';
-import { fetcher } from '@/lib/tanstackQuery/fetcher';
-import { post } from '@/lib/tanstackQuery/post';
 
 export interface CommunityPost {
   author: {
@@ -77,11 +80,20 @@ export const useGetCommunityPostComments = (id: string) => {
 };
 
 export const useCreateCommunityPostComment = (id: string) => {
+  const queryClient = useQueryClient();
   const api = (content: string) =>
     post<CommunityPostComment>(`api/posts/${id}/comments`, { content });
 
-  return useMutation({ mutationFn: api });
+  return useMutation({
+    mutationFn: api,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.community.post, id, 'comments'],
+      });
+    },
+  });
 };
+
 export const useCreateCommunityPost = (
   options?: UseMutationOptions<
     CommunityPost,
@@ -93,4 +105,45 @@ export const useCreateCommunityPost = (
     post<CommunityPost>('api/posts', { title, content });
 
   return useMutation({ mutationFn: api, ...options });
+};
+
+export const useDeleteCommunityPost = (id: string) => {
+  const api = () => apiCaller.delete(`api/posts/${id}`);
+
+  return useMutation({ mutationFn: api });
+};
+
+export const useDeleteCommunityPostComment = (id: string) => {
+  const queryClient = useQueryClient();
+  const api = (commentId: string) =>
+    apiCaller.delete(`api/posts/${id}/comments/${commentId}`);
+
+  return useMutation({
+    mutationFn: api,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.community.post, id, 'comments'],
+      });
+    },
+  });
+};
+
+export const useUpdateCommunityPostComment = (id: string) => {
+  const queryClient = useQueryClient();
+  const api = ({
+    commentId,
+    content,
+  }: {
+    commentId: string;
+    content: string;
+  }) => patch(`api/posts/${id}/comments/${commentId}`, { content });
+
+  return useMutation({
+    mutationFn: api,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.community.post, id, 'comments'],
+      });
+    },
+  });
 };
