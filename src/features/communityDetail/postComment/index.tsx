@@ -7,6 +7,7 @@ import {
   useDeleteCommunityPostComment,
   useUpdateCommunityPostComment,
 } from '@/globalState/tanstackQueryHooks/communityList';
+import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
@@ -21,8 +22,7 @@ export default function PostComment({ comments }: CommentProps) {
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState<string>('');
   const { id } = useParams();
-  const myUserId =
-    typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
+  const userId = useMyInfoStore((state) => state.userId);
 
   const { mutate: createComment } = useCreateCommunityPostComment(id as string);
   const { mutate: deleteComment } = useDeleteCommunityPostComment(id as string);
@@ -54,7 +54,7 @@ export default function PostComment({ comments }: CommentProps) {
                 />
                 {comment.user.nickname || '익명유저'}
               </div>
-              {comment.user.id === myUserId && (
+              {comment.user.id === userId && (
                 <div className={styles.container__comment__actions}>
                   {editingCommentId === comment.id ? (
                     <>
@@ -132,6 +132,7 @@ export default function PostComment({ comments }: CommentProps) {
             createComment(content);
             setContent('');
           }}
+          disabled={!userId}
         >
           등록
         </Button>
