@@ -1,15 +1,26 @@
 import { queryKeys } from '@/constants/query.keys';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { fetcher } from '@/lib/tanstackQuery/fetcher';
+import { post } from '@/lib/tanstackQuery/post';
 
 export interface CommunityPost {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  title: string;
-  viewCount: number;
+  author: {
+    createdAt: string;
+    deletedAt: string;
+    id: string;
+    loginId: string;
+    nickname: string;
+    profileImageUrl: string;
+    updatedAt: string;
+  };
   commentCount: number;
+  content: string;
+  createdAt: string;
+  id: string;
   isAuthor: boolean;
+  title: string;
+  updatedAt: string;
+  viewCount: number;
 }
 
 export interface CommunityListResponse {
@@ -22,6 +33,17 @@ export interface CommunityListResponse {
   };
 }
 
+export interface CommunityPostComment {
+  content: string;
+  createdAt: string;
+  id: string;
+  updatedAt: string;
+  user: {
+    id: string;
+    nickname: string;
+  };
+}
+
 export const useGetCommunityList = (page: number, limit: number) => {
   const api = () =>
     fetcher<CommunityListResponse>(`api/posts?page=${page}&limit=${limit}`);
@@ -30,4 +52,29 @@ export const useGetCommunityList = (page: number, limit: number) => {
     queryKey: [queryKeys.community.list, page, limit],
     queryFn: api,
   });
+};
+
+export const useGetCommunityPost = (id: string) => {
+  const api = () => fetcher<CommunityPost>(`api/posts/${id}`);
+
+  return useQuery({
+    queryKey: [queryKeys.community.post, id],
+    queryFn: api,
+  });
+};
+
+export const useGetCommunityPostComments = (id: string) => {
+  const api = () => fetcher<CommunityPostComment[]>(`api/posts/${id}/comments`);
+
+  return useQuery({
+    queryKey: [queryKeys.community.post, id, 'comments'],
+    queryFn: api,
+  });
+};
+
+export const useCreateCommunityPostComment = (id: string) => {
+  const api = (content: string) =>
+    post<CommunityPostComment>(`api/posts/${id}/comments`, { content });
+
+  return useMutation({ mutationFn: api });
 };
