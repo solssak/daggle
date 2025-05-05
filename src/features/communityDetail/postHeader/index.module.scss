@@ -1,0 +1,33 @@
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 24px 24px 24px 24px;
+  background-color: #fff;
+  border: 1px solid #eeeff1;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+
+  &__title {
+    @include typography(H1-M);
+    margin-bottom: 16px;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+
+    &__username {
+      @include typography(Body-2);
+      color: #a7a9b4;
+    }
+
+    &__createdAt {
+      @include typography(Body-2);
+      color: #a7a9b4;
+    }
+
+    &__separator {
+      margin: 0 12px;
+    }
+  }
+}
