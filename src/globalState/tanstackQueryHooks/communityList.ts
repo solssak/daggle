@@ -6,6 +6,8 @@ import {
 } from '@tanstack/react-query';
 import { fetcher } from '@/lib/tanstackQuery/fetcher';
 import { post } from '@/lib/tanstackQuery/post';
+import { apiCaller } from '@/apis';
+import { API_URL } from '@/constants/env';
 
 export interface CommunityPost {
   author: {
@@ -93,4 +95,10 @@ export const useCreateCommunityPost = (
     post<CommunityPost>('api/posts', { title, content });
 
   return useMutation({ mutationFn: api, ...options });
+};
+
+export const useDeleteCommunityPost = (id: string) => {
+  const api = () => apiCaller.delete(`api/posts/${id}`);
+
+  return useMutation({ mutationFn: api });
 };

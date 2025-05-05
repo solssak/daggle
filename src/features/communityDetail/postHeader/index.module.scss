@@ -12,22 +12,43 @@
     margin-bottom: 16px;
   }
 
-  &__meta {
+  &__bottom {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
-    &__username {
-      @include typography(Body-2);
-      color: #a7a9b4;
+    &__meta {
+      display: flex;
+      align-items: center;
+
+      &__username {
+        @include typography(Body-2);
+        color: #a7a9b4;
+      }
+
+      &__createdAt {
+        @include typography(Body-2);
+        color: #a7a9b4;
+      }
+
+      &__separator {
+        margin: 0 12px;
+      }
     }
 
-    &__createdAt {
-      @include typography(Body-2);
-      color: #a7a9b4;
-    }
+    &__actions {
+      display: flex;
+      gap: 12px;
 
-    &__separator {
-      margin: 0 12px;
+      &__edit,
+      &__delete {
+        @include typography(Body-2);
+        color: #a7a9b4;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
     }
   }
 }
