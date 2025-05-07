@@ -2,7 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 export default function useMedia() {
-  const mobile = useMediaQuery({ query: '(max-width: 642px)' });
+  const mobile = useMediaQuery({ query: '(max-width: 641px)' });
   const [isMobile, setIsMobile] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
