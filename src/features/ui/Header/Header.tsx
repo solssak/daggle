@@ -1,16 +1,18 @@
 'use client';
 
+import { useLogout } from '@/globalState/tanstackQueryHooks/Login';
 import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Header.module.scss';
-import { useState, useRef, useEffect } from 'react';
-import { useLogout } from '@/globalState/tanstackQueryHooks/Login';
 
 export default function Header() {
   const router = useRouter();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
+  const queryClient = useQueryClient();
 
   const { userId, nickname, profileImageUrl, refreshToken, clear } =
     useMyInfoStore();
@@ -38,6 +40,7 @@ export default function Header() {
       clear();
     }
 
+    queryClient.clear();
     router.push('/');
   };
 
