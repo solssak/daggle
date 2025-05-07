@@ -6,17 +6,25 @@
   padding: 24px 0;
 
   &__button {
-    background: #fff;
-    border-radius: 4px;
-    padding: 4px 12px;
-    font-size: 15px;
-    cursor: pointer;
-    color: #222;
-    transition: background 0.2s, border 0.2s;
-    border: none;
+    color: #a7a9b4;
+    font-size: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    &--active {
-      background: #eeeff1;
+    &__number {
+      background: #fff;
+      cursor: pointer;
+      font-size: 15px;
+      padding: 7px 13px;
+      border: none;
+      border-radius: 4px;
+      transition: background 0.2s, border 0.2s;
+
+      &--active {
+        background: #eeeff1;
+      }
     }
   }
 }
