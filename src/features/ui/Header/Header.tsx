@@ -55,7 +55,6 @@ export default function Header() {
     router.push('/');
   };
 
-  const handleSidebarClose = () => setIsSidebarOpen(false);
   const handleNavigate = (path: string) => {
     setIsSidebarOpen(false);
     router.push(path);
@@ -93,7 +92,7 @@ export default function Header() {
         className={`${styles.sidebar__overlay} ${
           isSidebarOpen ? styles.sidebar__overlay__open : ''
         }`}
-        onClick={handleSidebarClose}
+        onClick={() => setIsSidebarOpen(false)}
       />
       <div
         ref={sidebarRef}
@@ -102,7 +101,10 @@ export default function Header() {
         }`}
       >
         <div className={styles.sidebar__content}>
-          <span className={styles.sidebar__close} onClick={handleSidebarClose}>
+          <span
+            className={styles.sidebar__close}
+            onClick={() => setIsSidebarOpen(false)}
+          >
             <Image
               src="/images/icons/close.svg"
               alt="close"
