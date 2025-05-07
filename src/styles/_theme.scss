@@ -21,6 +21,11 @@
     line-height: 32px;
     line-height: 150%;
     letter-spacing: -0.3%;
+  } @else if $type == H1-XS {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.3%;
   } @else if $type == H7 {
     font-size: 18px;
     font-weight: 600;
