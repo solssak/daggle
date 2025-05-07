@@ -5,6 +5,10 @@
     padding-bottom: 12px;
     @include typography(H1-S);
     color: #5e616e;
+
+    @include respond-to-mobile {
+      padding-top: 0px;
+    }
   }
 
   &__title {
@@ -12,5 +16,9 @@
     color: #000000;
     text-align: center;
     padding-bottom: 40px;
+
+    @include respond-to-mobile {
+      padding-bottom: 24px;
+    }
   }
 }
