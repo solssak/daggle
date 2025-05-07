@@ -34,3 +34,56 @@
     }
   }
 }
+
+.profileContainer {
+  position: relative;
+  &__profileButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  &__popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    min-width: 200px;
+    z-index: 1000;
+
+    &__userInfo {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      span {
+        @include typography(Subtitle-L);
+        color: #333;
+      }
+    }
+
+    &__logout {
+      width: 100%;
+      padding: 8px 16px;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: #e0e0e0;
+      }
+    }
+  }
+}

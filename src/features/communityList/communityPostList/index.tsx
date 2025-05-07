@@ -7,22 +7,21 @@ import CommunityPost from './communityPost';
 import styles from './index.module.scss';
 import PageSelector from './pageSelector';
 import { useRouter } from 'next/navigation';
+import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
 
 export default function CommunityPostList() {
   const [page, setPage] = useState<number>(1);
   const limit = 10;
   const { data } = useGetCommunityList(page, limit);
   const router = useRouter();
+  const { accessToken } = useMyInfoStore();
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
 
   const handleWriteClick = () => {
-    const accessToken =
-      typeof window !== 'undefined' && localStorage.getItem('accessToken');
-
-    if (accessToken) {
+    if (typeof window !== 'undefined' && accessToken) {
       router.push('/post/write');
     } else {
       router.push('/auth');

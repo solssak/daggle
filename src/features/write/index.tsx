@@ -10,6 +10,8 @@ import {
   useGetCommunityPost,
 } from '@/globalState/tanstackQueryHooks/communityList';
 import { useParams, useRouter } from 'next/navigation';
+import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
+import { useUpdateCommunityPost } from '@/globalState/tanstackQueryHooks/communityList';
 
 export default function Write() {
   const [content, setContent] = useState<string>('');
@@ -23,15 +25,14 @@ export default function Write() {
   const isEditPage = !!postId;
 
   const { data: post } = useGetCommunityPost(postId);
+  const { mutate: updateCommunityPost } = useUpdateCommunityPost(postId);
+  const { accessToken } = useMyInfoStore();
 
   const isContentChanged =
     isEditPage && post && (title !== post.title || content !== post.content);
 
   useEffect(() => {
-    const accessToken =
-      typeof window !== 'undefined' && localStorage.getItem('accessToken');
-
-    if (!accessToken) {
+    if (typeof window !== 'undefined' && !accessToken) {
       router.replace('/auth');
     }
   }, [router]);
@@ -68,7 +69,12 @@ export default function Write() {
     }
     if (hasError) return;
 
-    createCommunityPost({ title, content });
+    if (isEditPage) {
+      updateCommunityPost({ title, content });
+      router.push(`/post/${postId}`);
+    } else {
+      createCommunityPost({ title, content });
+    }
   };
 
   return (
