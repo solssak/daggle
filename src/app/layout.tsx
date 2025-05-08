@@ -1,6 +1,6 @@
 import CommonHead from '@/features/modules/CommonHead/CommonHead';
 import '@/styles/globals.css';
-import Header from '@/features/ui/Header/Header';
+import Header from '@/features/ui/Header';
 import AppProvider from '@/features/modules/AppProvider';
 
 export default function RootLayout({
