@@ -8,6 +8,7 @@ import ContentTextarea from './contentTextarea';
 import {
   useCreateCommunityPost,
   useGetCommunityPost,
+  useUpdateCommunityPost,
 } from '@/globalState/tanstackQueryHooks/communityList';
 import { useParams, useRouter } from 'next/navigation';
 import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
@@ -51,6 +52,8 @@ export default function Write() {
       setContent(post.content);
     }
   }, [isEditPage, post]);
+
+  const { mutate: updateCommunityPost } = useUpdateCommunityPost(postId);
 
   const { mutate: createCommunityPost } = useCreateCommunityPost({
     onSuccess: (data) => {
