@@ -7,7 +7,7 @@ import { usePathname, useRouter, useParams } from 'next/navigation';
 import {
   useCreateCommunityPost,
   useUpdateCommunityPost,
-} from '@/globalState/tanstackQueryHooks/communityList';
+} from '@/globalState/tanstackQueryHooks/community';
 import { useWriteStore } from '@/globalState/zusatnd/useWriteStore';
 import { HEADER_CONSTANTS } from '../constants';
 

@@ -2,17 +2,17 @@
 
 import Button from '@/features/ui/Button/Button';
 import {
-  CommunityPostComment,
   useCreateCommunityPostComment,
   useDeleteCommunityPostComment,
   useUpdateCommunityPostComment,
-} from '@/globalState/tanstackQueryHooks/communityList';
+} from '@/globalState/tanstackQueryHooks/community';
 import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import styles from './index.module.scss';
 import { COMMUNITY_DETAIL_CONSTANTS } from '../constants';
+import { CommunityPostComment } from '@/types/community';
 
 interface CommentProps {
   comments: CommunityPostComment[] | undefined;

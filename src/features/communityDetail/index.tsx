@@ -3,7 +3,7 @@
 import {
   useGetCommunityPost,
   useGetCommunityPostComments,
-} from '@/globalState/tanstackQueryHooks/communityList';
+} from '@/globalState/tanstackQueryHooks/community';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import styles from './index.module.scss';

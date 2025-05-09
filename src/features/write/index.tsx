@@ -9,7 +9,7 @@ import {
   useCreateCommunityPost,
   useGetCommunityPost,
   useUpdateCommunityPost,
-} from '@/globalState/tanstackQueryHooks/communityList';
+} from '@/globalState/tanstackQueryHooks/community';
 import { useParams, useRouter } from 'next/navigation';
 import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
 import { useWriteStore } from '@/globalState/zusatnd/useWriteStore';

@@ -1,4 +1,4 @@
-import { useLogout } from '@/globalState/tanstackQueryHooks/Login';
+import { useLogout } from '@/globalState/tanstackQueryHooks/auth';
 import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';

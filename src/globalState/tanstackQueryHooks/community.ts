@@ -5,51 +5,15 @@ import { patch } from '@/lib/tanstackQuery/patch';
 import { post } from '@/lib/tanstackQuery/post';
 import { queryClient } from '@/lib/tanstackQuery/queryClient';
 import {
+  CommunityListResponse,
+  CommunityPost,
+  CommunityPostComment,
+} from '@/types/community';
+import {
   useMutation,
   UseMutationOptions,
   useQuery,
 } from '@tanstack/react-query';
-
-export interface CommunityPost {
-  author: {
-    createdAt: string;
-    deletedAt: string;
-    id: string;
-    loginId: string;
-    nickname: string;
-    profileImageUrl: string;
-    updatedAt: string;
-  };
-  commentCount: number;
-  content: string;
-  createdAt: string;
-  id: string;
-  isAuthor: boolean;
-  title: string;
-  updatedAt: string;
-  viewCount: number;
-}
-
-export interface CommunityListResponse {
-  items: CommunityPost[];
-  meta: {
-    totalItems: number;
-    currentPage: number;
-    itemsPerPage: number;
-    totalPages: number;
-  };
-}
-
-export interface CommunityPostComment {
-  content: string;
-  createdAt: string;
-  id: string;
-  updatedAt: string;
-  user: {
-    id: string;
-    nickname: string;
-  };
-}
 
 export const useGetCommunityList = (page: number, limit: number) => {
   const api = () =>

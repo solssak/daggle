@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/features/ui/Button/Button';
-import { useGetCommunityList } from '@/globalState/tanstackQueryHooks/communityList';
+import { useGetCommunityList } from '@/globalState/tanstackQueryHooks/community';
 import { useState, useEffect } from 'react';
 import CommunityPost from './communityPost';
 import styles from './index.module.scss';

@@ -1,9 +1,7 @@
 'use client';
 
-import {
-  CommunityPost,
-  useDeleteCommunityPost,
-} from '@/globalState/tanstackQueryHooks/communityList';
+import { useDeleteCommunityPost } from '@/globalState/tanstackQueryHooks/community';
+import { CommunityPost } from '@/types/community';
 import Image from 'next/image';
 import styles from './index.module.scss';
 import { useRouter } from 'next/navigation';
