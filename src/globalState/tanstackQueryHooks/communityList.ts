@@ -3,11 +3,11 @@ import { queryKeys } from '@/constants/query.keys';
 import { fetcher } from '@/lib/tanstackQuery/fetcher';
 import { patch } from '@/lib/tanstackQuery/patch';
 import { post } from '@/lib/tanstackQuery/post';
+import { queryClient } from '@/lib/tanstackQuery/queryClient';
 import {
   useMutation,
   UseMutationOptions,
   useQuery,
-  useQueryClient,
 } from '@tanstack/react-query';
 
 export interface CommunityPost {
@@ -80,7 +80,6 @@ export const useGetCommunityPostComments = (id: string) => {
 };
 
 export const useCreateCommunityPostComment = (id: string) => {
-  const queryClient = useQueryClient();
   const api = (content: string) =>
     post<CommunityPostComment>(`api/posts/${id}/comments`, { content });
 
@@ -121,7 +120,6 @@ export const useDeleteCommunityPost = (id: string) => {
 };
 
 export const useDeleteCommunityPostComment = (id: string) => {
-  const queryClient = useQueryClient();
   const api = (commentId: string) =>
     apiCaller.delete(`api/posts/${id}/comments/${commentId}`);
 
@@ -136,7 +134,6 @@ export const useDeleteCommunityPostComment = (id: string) => {
 };
 
 export const useUpdateCommunityPostComment = (id: string) => {
-  const queryClient = useQueryClient();
   const api = ({
     commentId,
     content,
