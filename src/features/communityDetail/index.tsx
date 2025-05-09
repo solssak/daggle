@@ -3,12 +3,13 @@
 import {
   useGetCommunityPost,
   useGetCommunityPostComments,
-} from '@/globalState/tanstackQueryHooks/communityList';
+} from '@/globalState/tanstackQueryHooks/community';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import styles from './index.module.scss';
 import PostComment from './postComment';
 import PostHeader from './postHeader';
+import { COMMUNITY_DETAIL_CONSTANTS } from './constants';
 
 export default function CommunityDetail() {
   const { id } = useParams();
@@ -27,15 +28,16 @@ export default function CommunityDetail() {
             src={
               post?.author.profileImageUrl
                 ? post?.author.profileImageUrl
-                : '/images/community-detail/comment.svg'
+                : COMMUNITY_DETAIL_CONSTANTS.IMAGE.COMMENT.DEFAULT
             }
             className={styles.container__content__commentIcon}
-            alt="댓글 아이콘"
-            width={19}
-            height={18}
+            alt={COMMUNITY_DETAIL_CONSTANTS.IMAGE.COMMENT.ALT}
+            width={COMMUNITY_DETAIL_CONSTANTS.IMAGE.COMMENT.WIDTH}
+            height={COMMUNITY_DETAIL_CONSTANTS.IMAGE.COMMENT.HEIGHT}
           />
           <div className={styles.container__content__commentCount}>
-            {comments?.length}개
+            {comments?.length}
+            {COMMUNITY_DETAIL_CONSTANTS.TEXT.COMMENT.COUNT_SUFFIX}
           </div>
         </div>
       </div>

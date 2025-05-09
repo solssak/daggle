@@ -1,12 +1,11 @@
 'use client';
 
-import {
-  CommunityPost,
-  useDeleteCommunityPost,
-} from '@/globalState/tanstackQueryHooks/communityList';
+import { useDeleteCommunityPost } from '@/globalState/tanstackQueryHooks/community';
+import { CommunityPost } from '@/types/community';
 import Image from 'next/image';
 import styles from './index.module.scss';
 import { useRouter } from 'next/navigation';
+import { COMMUNITY_DETAIL_CONSTANTS } from '../constants';
 
 interface PostHeaderProps {
   post: CommunityPost | undefined;
@@ -22,14 +21,15 @@ export default function PostHeader({ post }: PostHeaderProps) {
       <div className={styles.container__bottom}>
         <div className={styles.container__bottom__meta}>
           <span className={styles.container__bottom__meta__username}>
-            {post?.author?.nickname || '익명유저'}
+            {post?.author?.nickname ||
+              COMMUNITY_DETAIL_CONSTANTS.TEXT.DEFAULT_USERNAME}
           </span>
           <Image
-            src={'/images/community-detail/separator.svg'}
+            src={COMMUNITY_DETAIL_CONSTANTS.IMAGE.SEPARATOR.SRC}
             className={styles.container__bottom__meta__separator}
-            alt="profile"
-            width={2}
-            height={20}
+            alt={COMMUNITY_DETAIL_CONSTANTS.IMAGE.SEPARATOR.ALT}
+            width={COMMUNITY_DETAIL_CONSTANTS.IMAGE.SEPARATOR.WIDTH}
+            height={COMMUNITY_DETAIL_CONSTANTS.IMAGE.SEPARATOR.HEIGHT}
           />
           <span className={styles.container__bottom__meta__createdAt}>
             {post?.createdAt?.slice(2, 10).replace(/-/g, '.')}
@@ -43,18 +43,20 @@ export default function PostHeader({ post }: PostHeaderProps) {
                 router.push(`/post/write/${post?.id}`);
               }}
             >
-              수정
+              {COMMUNITY_DETAIL_CONSTANTS.TEXT.BUTTON.EDIT}
             </button>
             <button
               className={styles.container__bottom__actions__delete}
               onClick={() => {
-                if (confirm('게시글을 삭제하시겠습니까?')) {
+                if (
+                  confirm(COMMUNITY_DETAIL_CONSTANTS.TEXT.CONFIRM.DELETE_POST)
+                ) {
                   deletePost();
                   router.push('/');
                 }
               }}
             >
-              삭제
+              {COMMUNITY_DETAIL_CONSTANTS.TEXT.BUTTON.DELETE}
             </button>
           </div>
         )}
