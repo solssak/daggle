@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import styles from './index.module.scss';
+import { HEADER_CONSTANTS } from '../../constants';
 
 interface PopupProps {
   profileImageUrl?: string;
@@ -20,22 +21,22 @@ export default function Popup({
     <div ref={popupRef} className={styles.container__popup}>
       <div className={styles.container__popup__userInfo}>
         <Image
-          src={profileImageUrl || '/images/community-list/profile.svg'}
-          alt="profile"
-          width={32}
-          height={32}
+          src={profileImageUrl || HEADER_CONSTANTS.PROFILE.DEFAULT}
+          alt={HEADER_CONSTANTS.PROFILE.ALT}
+          width={HEADER_CONSTANTS.PROFILE.WIDTH}
+          height={HEADER_CONSTANTS.PROFILE.HEIGHT}
         />
-        <span>{nickname || '익명유저'} 님</span>
+        <span>{nickname || HEADER_CONSTANTS.TEXT.POPUP.ANONYMOUS} 님</span>
       </div>
       <button
         className={styles.container__popup__logout}
         onClick={() => {
-          if (window.confirm('로그아웃 하시겠습니까?')) {
+          if (window.confirm(HEADER_CONSTANTS.TEXT.POPUP.LOGOUT_CONFIRM)) {
             onLogout();
           }
         }}
       >
-        로그아웃
+        {HEADER_CONSTANTS.TEXT.POPUP.LOGOUT}
       </button>
     </div>
   );

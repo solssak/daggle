@@ -6,6 +6,7 @@ import { useRef, useState } from 'react';
 import styles from '../index.module.scss';
 import Popup from './popUp';
 import { useClickOutside } from '../../../../hooks/useClickOutside';
+import { HEADER_CONSTANTS } from '../constants';
 
 interface DesktopViewProps {
   userId?: string;
@@ -33,13 +34,13 @@ export default function DesktopView({
     <>
       <button
         className={styles.header__container__logo}
-        onClick={() => router.push('/')}
+        onClick={() => router.push(HEADER_CONSTANTS.PATHS.HOME)}
       >
         <Image
-          src="/images/logo/logo@3x.png"
-          alt="logo"
-          width={100}
-          height={20}
+          src={HEADER_CONSTANTS.LOGO.SRC}
+          alt={HEADER_CONSTANTS.LOGO.ALT}
+          width={HEADER_CONSTANTS.LOGO.WIDTH}
+          height={HEADER_CONSTANTS.LOGO.HEIGHT}
         />
       </button>
 
@@ -52,10 +53,10 @@ export default function DesktopView({
                 className={styles.profileContainer__profileButton}
               >
                 <Image
-                  src="/images/auth/profile.svg"
-                  alt="profile"
-                  width={32}
-                  height={32}
+                  src={HEADER_CONSTANTS.PROFILE.SRC}
+                  alt={HEADER_CONSTANTS.PROFILE.ALT}
+                  width={HEADER_CONSTANTS.PROFILE.WIDTH}
+                  height={HEADER_CONSTANTS.PROFILE.HEIGHT}
                 />
               </button>
               {isPopupOpen && (
@@ -70,9 +71,9 @@ export default function DesktopView({
           ) : (
             <button
               className={styles.header__isLogin__button__login}
-              onClick={() => router.push('/auth')}
+              onClick={() => router.push(HEADER_CONSTANTS.PATHS.AUTH)}
             >
-              로그인
+              {HEADER_CONSTANTS.TEXT.LOGIN}
             </button>
           )}
         </div>

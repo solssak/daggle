@@ -3,53 +3,17 @@ import { queryKeys } from '@/constants/query.keys';
 import { fetcher } from '@/lib/tanstackQuery/fetcher';
 import { patch } from '@/lib/tanstackQuery/patch';
 import { post } from '@/lib/tanstackQuery/post';
+import { queryClient } from '@/lib/tanstackQuery/queryClient';
+import {
+  CommunityListResponse,
+  CommunityPost,
+  CommunityPostComment,
+} from '@/types/community';
 import {
   useMutation,
   UseMutationOptions,
   useQuery,
-  useQueryClient,
 } from '@tanstack/react-query';
-
-export interface CommunityPost {
-  author: {
-    createdAt: string;
-    deletedAt: string;
-    id: string;
-    loginId: string;
-    nickname: string;
-    profileImageUrl: string;
-    updatedAt: string;
-  };
-  commentCount: number;
-  content: string;
-  createdAt: string;
-  id: string;
-  isAuthor: boolean;
-  title: string;
-  updatedAt: string;
-  viewCount: number;
-}
-
-export interface CommunityListResponse {
-  items: CommunityPost[];
-  meta: {
-    totalItems: number;
-    currentPage: number;
-    itemsPerPage: number;
-    totalPages: number;
-  };
-}
-
-export interface CommunityPostComment {
-  content: string;
-  createdAt: string;
-  id: string;
-  updatedAt: string;
-  user: {
-    id: string;
-    nickname: string;
-  };
-}
 
 export const useGetCommunityList = (page: number, limit: number) => {
   const api = () =>
@@ -80,7 +44,6 @@ export const useGetCommunityPostComments = (id: string) => {
 };
 
 export const useCreateCommunityPostComment = (id: string) => {
-  const queryClient = useQueryClient();
   const api = (content: string) =>
     post<CommunityPostComment>(`api/posts/${id}/comments`, { content });
 
@@ -121,7 +84,6 @@ export const useDeleteCommunityPost = (id: string) => {
 };
 
 export const useDeleteCommunityPostComment = (id: string) => {
-  const queryClient = useQueryClient();
   const api = (commentId: string) =>
     apiCaller.delete(`api/posts/${id}/comments/${commentId}`);
 
@@ -136,7 +98,6 @@ export const useDeleteCommunityPostComment = (id: string) => {
 };
 
 export const useUpdateCommunityPostComment = (id: string) => {
-  const queryClient = useQueryClient();
   const api = ({
     commentId,
     content,

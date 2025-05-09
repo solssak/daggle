@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/features/ui/Button/Button';
-import { useLogin } from '@/globalState/tanstackQueryHooks/Login';
+import { useLogin } from '@/globalState/tanstackQueryHooks/auth';
 import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
