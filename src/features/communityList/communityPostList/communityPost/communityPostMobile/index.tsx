@@ -9,7 +9,7 @@ export interface CommunityPostMobileProps {
   title: string;
   createdAt: string;
   commentCount: number;
-  username: string;
+  username: boolean;
 }
 
 export default function CommunityPostMobile({
