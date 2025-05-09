@@ -38,6 +38,14 @@ src
 ├── types               # 전역 타입 정의 (interface, type 등)
 └── ui                  # 공통 UI 컴포넌트 (버튼, 입력창 등)
 ```
+
+## 🔘 폴더구조
+```
+main            # 최종 배포용 브랜치
+└── dev         # 기능 개발 통합 브랜치
+    └── feat/*  # 개별 기능 단위 브랜치 (ex. feat/login, feat/post-write 등)
+```
+
 ## 🔘 전달사항
 ### 🔘 구현 전달사항
 1. SCSS(SASS) 환경 세팅   
