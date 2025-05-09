@@ -1,15 +1,24 @@
 .container {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 24px 24px 24px 24px;
+  padding: 24px;
   background-color: #fff;
   border: 1px solid #eeeff1;
   border-bottom: none;
   border-radius: 12px 12px 0 0;
 
+  @include respond-to-mobile {
+    padding: 12px 16px;
+    border-top: none;
+  }
+
   &__title {
     @include typography(H1-M);
     margin-bottom: 16px;
+
+    @include respond-to-mobile {
+      @include typography(H1-S);
+    }
   }
 
   &__bottom {
@@ -21,14 +30,14 @@
       display: flex;
       align-items: center;
 
-      &__username {
-        @include typography(Body-2);
-        color: #a7a9b4;
-      }
-
+      &__username,
       &__createdAt {
         @include typography(Body-2);
         color: #a7a9b4;
+
+        @include respond-to-mobile {
+          @include typography(Body-3);
+        }
       }
 
       &__separator {
@@ -48,6 +57,10 @@
         border: none;
         padding: 0;
         cursor: pointer;
+
+        @include respond-to-mobile {
+          @include typography(Body-3);
+        }
       }
     }
   }

@@ -8,7 +8,8 @@
   }
 
   @include respond-to-mobile {
-    padding: 24px 16px;
+    padding: 0 16px;
+    background-color: #fff;
   }
 
   &__wrapper {
@@ -18,6 +19,11 @@
     background-color: #fff;
     border: 1px solid #eeeff1;
     border-radius: 16px;
+
+    @include respond-to-mobile {
+      padding: 0;
+      border: none;
+    }
 
     &__title {
       @include typography(H1-R);

@@ -107,6 +107,13 @@ export const useCreateCommunityPost = (
   return useMutation({ mutationFn: api, ...options });
 };
 
+export const useUpdateCommunityPost = (id: string) => {
+  const api = ({ title, content }: { title: string; content: string }) =>
+    patch<CommunityPost>(`api/posts/${id}`, { title, content });
+
+  return useMutation({ mutationFn: api });
+};
+
 export const useDeleteCommunityPost = (id: string) => {
   const api = () => apiCaller.delete(`api/posts/${id}`);
 

@@ -1,0 +1,77 @@
+.header {
+  box-shadow: 0px 9px 10px 0px rgba(232, 232, 232, 0.25);
+  margin: 0 auto;
+  padding: 24px 120px;
+  position: relative;
+
+  @include respond-to-tablet {
+    padding: 24px 30px;
+  }
+
+  @include respond-to-mobile {
+    box-shadow: none;
+    padding: 16px;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &__logo {
+      padding: 6px 0;
+      cursor: pointer;
+    }
+
+    &__hamburger {
+      display: none;
+      background: none;
+      border: none;
+
+      &__backButton {
+        cursor: pointer;
+      }
+
+      &__icon {
+        cursor: pointer;
+      }
+
+      @include respond-to-mobile {
+        display: block;
+        @include typography(H1-XS);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__writeButton {
+      cursor: pointer;
+      @include typography(H1-XS);
+    }
+  }
+
+  &__isLogin {
+    &__button {
+      cursor: pointer;
+      &__login {
+        @include typography(H7);
+        cursor: pointer;
+      }
+    }
+
+    @include respond-to-mobile {
+      display: none;
+    }
+  }
+}
+
+.profileContainer {
+  position: relative;
+
+  &__profileButton {
+    cursor: pointer;
+  }
+}

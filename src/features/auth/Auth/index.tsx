@@ -14,15 +14,16 @@ export default function Auth() {
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const router = useRouter();
   const { mutate } = useLogin();
-  const setUserId = useMyInfoStore((state) => state.setUserId);
+
+  const { setUserStorage, accessToken, refreshToken } = useMyInfoStore();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (accessToken && refreshToken) {
+    if (typeof window !== 'undefined' && accessToken && refreshToken) {
+      setUserStorage('accessToken', accessToken);
+      setUserStorage('refreshToken', refreshToken);
       router.replace('/');
     }
-  }, [router]);
+  }, [router, accessToken, refreshToken]);
 
   const handleLogin = async () => {
     const idValid = !!id;
@@ -37,10 +38,14 @@ export default function Auth() {
       { loginId: id, password: password },
       {
         onSuccess: (data) => {
-          localStorage.setItem('accessToken', data.tokens.accessToken);
-          localStorage.setItem('refreshToken', data.tokens.refreshToken);
-          setUserId(data.user.id);
-          router.replace('/');
+          if (typeof window !== 'undefined') {
+            setUserStorage('userId', data.user.id);
+            setUserStorage('accessToken', data.tokens.accessToken);
+            setUserStorage('refreshToken', data.tokens.refreshToken);
+            setUserStorage('nickname', data.user.nickname);
+            setUserStorage('profileImageUrl', data.user.profileImageUrl);
+            router.replace('/');
+          }
         },
         onError: (error) => {
           if (error.response?.status === 400) {

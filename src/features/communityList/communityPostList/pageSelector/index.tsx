@@ -1,8 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { memo, useMemo } from 'react';
 import styles from './index.module.scss';
-
 interface PageSelectorProps {
   currentPage: number;
   totalPages: number;
@@ -31,18 +31,22 @@ function PageSelector({
     <nav className={styles.pagination} aria-label="페이지 네비게이션">
       <button
         className={styles.pagination__button}
-        disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
         aria-label="이전 페이지"
       >
-        {'<'}
+        <Image
+          src="/images/community-list/arrow-left.svg"
+          alt="이전 페이지"
+          width={16}
+          height={16}
+        />
       </button>
       {pageNumbers.map((pageNumber) => (
         <button
           key={pageNumber}
-          className={`${styles.pagination__button} ${
+          className={`${styles.pagination__button__number} ${
             currentPage === pageNumber
-              ? styles['pagination__button--active']
+              ? styles['pagination__button__number--active']
               : ''
           }`}
           onClick={() => onPageChange(pageNumber)}
@@ -53,11 +57,15 @@ function PageSelector({
       ))}
       <button
         className={styles.pagination__button}
-        disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
         aria-label="다음 페이지"
       >
-        {'>'}
+        <Image
+          src="/images/community-list/arrow-right.svg"
+          alt="다음 페이지"
+          width={16}
+          height={16}
+        />
       </button>
     </nav>
   );

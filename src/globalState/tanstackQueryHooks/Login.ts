@@ -28,3 +28,10 @@ export const useLogin = () => {
       post('api/auth/login', payload),
   });
 };
+
+export const useLogout = () => {
+  return useMutation<void, AxiosError, { refreshToken: string }>({
+    mutationFn: (payload: { refreshToken: string }) =>
+      post('api/auth/logout', payload),
+  });
+};

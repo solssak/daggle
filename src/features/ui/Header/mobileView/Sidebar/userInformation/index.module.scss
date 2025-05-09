@@ -1,0 +1,13 @@
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eeeff1;
+  margin-bottom: 24px;
+
+  span {
+    @include typography(H1-XS);
+    color: #333;
+  }
+}
