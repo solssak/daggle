@@ -23,7 +23,7 @@ export default function Auth() {
       setUserStorage('refreshToken', refreshToken);
       router.replace('/');
     }
-  }, [router, accessToken, refreshToken]);
+  }, [router, accessToken, refreshToken, setUserStorage]);
 
   const handleLogin = async () => {
     const idValid = !!id;
