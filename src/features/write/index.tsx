@@ -2,7 +2,7 @@
 
 import Button from '../ui/Button/Button';
 import styles from './index.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import TitleInput from './titleInput';
 import ContentTextarea from './contentTextarea';
 import {
@@ -11,13 +11,10 @@ import {
 } from '@/globalState/tanstackQueryHooks/communityList';
 import { useParams, useRouter } from 'next/navigation';
 import { useMyInfoStore } from '@/globalState/zusatnd/useMyInfoStore';
-import { useUpdateCommunityPost } from '@/globalState/tanstackQueryHooks/communityList';
+import { useWriteStore } from '@/globalState/zusatnd/useWriteStore';
+import useMedia from '@/hooks/useMedia';
 
 export default function Write() {
-  const [content, setContent] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [titleError, setTitleError] = useState<boolean>(false);
-  const [contentError, setContentError] = useState<boolean>(false);
   const maxContentLength = 300;
   const router = useRouter();
   const params = useParams();
@@ -25,8 +22,19 @@ export default function Write() {
   const isEditPage = !!postId;
 
   const { data: post } = useGetCommunityPost(postId);
-  const { mutate: updateCommunityPost } = useUpdateCommunityPost(postId);
   const { accessToken } = useMyInfoStore();
+  const { isMobile } = useMedia();
+
+  const {
+    title,
+    content,
+    titleError,
+    contentError,
+    setTitle,
+    setContent,
+    setTitleError,
+    setContentError,
+  } = useWriteStore();
 
   const isContentChanged =
     isEditPage && post && (title !== post.title || content !== post.content);
@@ -80,9 +88,11 @@ export default function Write() {
   return (
     <section className={styles.container}>
       <div className={styles.container__wrapper}>
-        <h1 className={styles.container__wrapper__title}>
-          {isEditPage ? '게시글 수정' : '게시글 작성'}
-        </h1>
+        {!isMobile && (
+          <h1 className={styles.container__wrapper__title}>
+            {isEditPage ? '게시글 수정' : '게시글 작성'}
+          </h1>
+        )}
         <form className={styles.container__wrapper__form}>
           <TitleInput value={title} onChange={setTitle} hasError={titleError} />
           <ContentTextarea
@@ -93,14 +103,16 @@ export default function Write() {
           />
         </form>
       </div>
-      <Button
-        className={styles.container__button}
-        size="lg"
-        onClick={handleSubmit}
-        disabled={isEditPage && !isContentChanged}
-      >
-        {isEditPage ? '수정하기' : '등록하기'}
-      </Button>
+      {!isMobile && (
+        <Button
+          className={styles.container__button}
+          size="lg"
+          onClick={handleSubmit}
+          disabled={isEditPage && !isContentChanged}
+        >
+          {isEditPage ? '수정하기' : '등록하기'}
+        </Button>
+      )}
     </section>
   );
 }
