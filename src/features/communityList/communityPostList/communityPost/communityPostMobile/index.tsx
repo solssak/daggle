@@ -18,7 +18,7 @@ export default function CommunityPostMobile({
   createdAt,
   commentCount,
   username,
-}: CommunityPostProps) {
+}: CommunityPostMobileProps) {
   return (
     <li className={styles.container} key={id}>
       <Link href={`/post/${id}`} className={styles.container__link}>
