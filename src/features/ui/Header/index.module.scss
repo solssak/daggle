@@ -29,12 +29,23 @@
       display: none;
       background: none;
       border: none;
-      cursor: pointer;
-      padding: 8px;
+
+      &__backButton {
+        cursor: pointer;
+      }
 
       @include respond-to-mobile {
         display: block;
+        @include typography(H1-XS);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
+    }
+
+    &__writeButton {
+      cursor: pointer;
+      @include typography(H1-XS);
     }
   }
 
