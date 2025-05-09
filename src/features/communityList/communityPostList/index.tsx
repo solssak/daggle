@@ -12,6 +12,7 @@ import useMedia from '@/hooks/useMedia';
 import CommunityPostMobile from './communityPost/communityPostMobile';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
+import { COMMUNITY_LIST_CONSTANTS } from '../constants';
 
 interface CommunityPostItem {
   id: string;
@@ -28,7 +29,7 @@ export default function CommunityPostList() {
   const [allItems, setAllItems] = useState<CommunityPostItem[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const limit = 10;
+  const limit = COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.LIMIT;
 
   const { data, isLoading } = useGetCommunityList(page, limit);
   const { accessToken } = useMyInfoStore();
@@ -79,10 +80,12 @@ export default function CommunityPostList() {
     <div className={styles.container}>
       {/* 게시판 헤더 */}
       <div className={styles.container__header}>
-        <span className={styles.container__header__title}>게시판</span>
+        <span className={styles.container__header__title}>
+          {COMMUNITY_LIST_CONSTANTS.POST_LIST.TITLE}
+        </span>
         {!isMobile && (
           <Button variant="purple" onClick={handleWriteClick}>
-            글쓰기
+            {COMMUNITY_LIST_CONSTANTS.POST_LIST.BUTTON.WRITE}
           </Button>
         )}
       </div>
@@ -126,10 +129,12 @@ export default function CommunityPostList() {
           onClick={handleWriteClick}
         >
           <Image
-            src="/images/community-list/mobile_write_button.svg"
-            alt="글쓰기"
-            width={24}
-            height={24}
+            src={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.WRITE_BUTTON.IMAGE}
+            alt={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.WRITE_BUTTON.ALT}
+            width={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.WRITE_BUTTON.WIDTH}
+            height={
+              COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.WRITE_BUTTON.HEIGHT
+            }
           />
         </button>
       )}

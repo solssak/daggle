@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import styles from './index.module.scss';
+import { COMMUNITY_DETAIL_CONSTANTS } from '../constants';
 
 interface CommentProps {
   comments: CommunityPostComment[] | undefined;
@@ -47,12 +48,13 @@ export default function PostComment({ comments }: CommentProps) {
             <div className={styles.container__comment__top}>
               <div className={styles.container__comment__username}>
                 <Image
-                  src={'/images/community-list/profile.svg'}
-                  alt="profile"
-                  width={24}
-                  height={24}
+                  src={COMMUNITY_DETAIL_CONSTANTS.IMAGE.PROFILE.SRC}
+                  alt={COMMUNITY_DETAIL_CONSTANTS.IMAGE.PROFILE.ALT}
+                  width={COMMUNITY_DETAIL_CONSTANTS.IMAGE.PROFILE.WIDTH}
+                  height={COMMUNITY_DETAIL_CONSTANTS.IMAGE.PROFILE.HEIGHT}
                 />
-                {comment.user.nickname || '익명유저'}
+                {comment.user.nickname ||
+                  COMMUNITY_DETAIL_CONSTANTS.TEXT.DEFAULT_USERNAME}
               </div>
               {comment.user.id === userId && (
                 <div className={styles.container__comment__actions}>
@@ -69,13 +71,13 @@ export default function PostComment({ comments }: CommentProps) {
                           setEditContent('');
                         }}
                       >
-                        저장
+                        {COMMUNITY_DETAIL_CONSTANTS.TEXT.BUTTON.SAVE}
                       </button>
                       <button
                         className={styles.container__comment__actions__cancel}
                         onClick={handleCancelEdit}
                       >
-                        취소
+                        {COMMUNITY_DETAIL_CONSTANTS.TEXT.BUTTON.CANCEL}
                       </button>
                     </>
                   ) : (
@@ -84,17 +86,22 @@ export default function PostComment({ comments }: CommentProps) {
                         className={styles.container__comment__actions__edit}
                         onClick={() => handleEditClick(comment)}
                       >
-                        수정
+                        {COMMUNITY_DETAIL_CONSTANTS.TEXT.BUTTON.EDIT}
                       </button>
                       <button
                         className={styles.container__comment__actions__delete}
                         onClick={() => {
-                          if (confirm('댓글을 삭제하시겠습니까?')) {
+                          if (
+                            confirm(
+                              COMMUNITY_DETAIL_CONSTANTS.TEXT.CONFIRM
+                                .DELETE_COMMENT,
+                            )
+                          ) {
                             deleteComment(comment.id);
                           }
                         }}
                       >
-                        삭제
+                        {COMMUNITY_DETAIL_CONSTANTS.TEXT.BUTTON.DELETE}
                       </button>
                     </>
                   )}
@@ -123,7 +130,7 @@ export default function PostComment({ comments }: CommentProps) {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className={styles.container__write__textarea}
-          placeholder="댓글을 통해 자유롭게 의견을 나눠보세요"
+          placeholder={COMMUNITY_DETAIL_CONSTANTS.TEXT.COMMENT.PLACEHOLDER}
         />
         <Button
           variant="grayscale1"
@@ -134,7 +141,7 @@ export default function PostComment({ comments }: CommentProps) {
           }}
           disabled={!userId}
         >
-          등록
+          {COMMUNITY_DETAIL_CONSTANTS.TEXT.BUTTON.SUBMIT}
         </Button>
       </div>
     </ul>

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.scss';
+import { COMMUNITY_LIST_CONSTANTS } from '../../../constants';
 
 export interface CommunityPostMobileProps {
   id: string;
@@ -34,10 +35,14 @@ export default function CommunityPostMobile({
               </time>
               <div className={styles.container__content__bottom__meta__comment}>
                 <Image
-                  src={'/images/community-list/comment.svg'}
-                  alt="comment"
-                  width={16}
-                  height={16}
+                  src={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.COMMENT.IMAGE}
+                  alt={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.COMMENT.ALT}
+                  width={
+                    COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.COMMENT.WIDTH
+                  }
+                  height={
+                    COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.COMMENT.HEIGHT
+                  }
                 />
                 <span
                   className={
@@ -50,13 +55,16 @@ export default function CommunityPostMobile({
             </div>
             <div className={styles.container__content__bottom__profile}>
               <Image
-                src={'/images/community-list/profile.svg'}
-                alt="profile"
-                width={24}
-                height={24}
+                src={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.PROFILE.IMAGE}
+                alt={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.PROFILE.ALT}
+                width={COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.PROFILE.WIDTH}
+                height={
+                  COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.PROFILE.HEIGHT
+                }
               />
               <span className={styles.container__content__bottom__username}>
-                {username || '익명유저'}
+                {username ||
+                  COMMUNITY_LIST_CONSTANTS.POST_LIST.MOBILE.DEFAULT_USERNAME}
               </span>
             </div>
           </div>

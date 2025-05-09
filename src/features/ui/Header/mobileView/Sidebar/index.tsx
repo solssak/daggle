@@ -6,6 +6,7 @@ import styles from './index.module.scss';
 import Navigation from './navigation';
 import { UserInfo } from './types';
 import UserInformation from './userInformation';
+import { HEADER_CONSTANTS } from '@/features/ui/Header/constants';
 
 export interface SidebarProps extends UserInfo {
   isOpen: boolean;
@@ -40,10 +41,10 @@ export default function Sidebar({
         <div className={styles.sidebar__content}>
           <span className={styles.sidebar__close} onClick={onClose}>
             <Image
-              src="/images/icons/close.svg"
-              alt="close"
-              width={13}
-              height={13}
+              src={HEADER_CONSTANTS.MOBILE.CLOSE.SRC}
+              alt={HEADER_CONSTANTS.MOBILE.CLOSE.ALT}
+              width={HEADER_CONSTANTS.MOBILE.CLOSE.WIDTH}
+              height={HEADER_CONSTANTS.MOBILE.CLOSE.HEIGHT}
             />
           </span>
           <UserInformation

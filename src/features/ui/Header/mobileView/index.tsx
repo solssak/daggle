@@ -9,6 +9,7 @@ import {
   useUpdateCommunityPost,
 } from '@/globalState/tanstackQueryHooks/communityList';
 import { useWriteStore } from '@/globalState/zusatnd/useWriteStore';
+import { HEADER_CONSTANTS } from '../constants';
 
 interface MobileViewProps {
   userId?: string;
@@ -52,13 +53,15 @@ export default function MobileView({
 
   const handleSubmit = () => {
     let hasError = false;
-    if (title.trim().length < 1) {
+    if (title.trim().length < HEADER_CONSTANTS.VALIDATION.TITLE.MIN_LENGTH) {
       setTitleError(true);
       hasError = true;
     } else {
       setTitleError(false);
     }
-    if (content.trim().length < 5) {
+    if (
+      content.trim().length < HEADER_CONSTANTS.VALIDATION.CONTENT.MIN_LENGTH
+    ) {
       setContentError(true);
       hasError = true;
     } else {
@@ -76,31 +79,35 @@ export default function MobileView({
 
   return (
     <>
-      {pathname.startsWith('/post') ? (
+      {pathname.startsWith(HEADER_CONSTANTS.PATHS.POST) ? (
         <>
           <button className={styles.header__container__hamburger}>
             <Image
-              src="/images/icons/arrow-back.svg"
-              alt="back"
-              width={24}
-              height={24}
+              src={HEADER_CONSTANTS.MOBILE.BACK.SRC}
+              alt={HEADER_CONSTANTS.MOBILE.BACK.ALT}
+              width={HEADER_CONSTANTS.MOBILE.BACK.WIDTH}
+              height={HEADER_CONSTANTS.MOBILE.BACK.HEIGHT}
               className={styles.header__container__hamburger__backButton}
               onClick={() => {
                 router.back();
               }}
             />
-            {pathname.startsWith('/post/write') && (
+            {pathname.startsWith(HEADER_CONSTANTS.PATHS.WRITE) && (
               <span className={styles.header__container__hamburger__writeTitle}>
-                {isEditPage ? '게시글 수정' : '게시글 작성'}
+                {isEditPage
+                  ? HEADER_CONSTANTS.TEXT.WRITE.EDIT_TITLE
+                  : HEADER_CONSTANTS.TEXT.WRITE.TITLE}
               </span>
             )}
           </button>
-          {pathname.startsWith('/post/write') && (
+          {pathname.startsWith(HEADER_CONSTANTS.PATHS.WRITE) && (
             <button
               className={styles.header__container__writeButton}
               onClick={handleSubmit}
             >
-              {isEditPage ? '수정' : '등록'}
+              {isEditPage
+                ? HEADER_CONSTANTS.TEXT.WRITE.EDIT
+                : HEADER_CONSTANTS.TEXT.WRITE.SUBMIT}
             </button>
           )}
         </>
@@ -112,11 +119,11 @@ export default function MobileView({
           }}
         >
           <Image
-            src="/images/icons/hamburger.svg"
+            src={HEADER_CONSTANTS.MOBILE.MENU.SRC}
             className={styles.header__container__hamburger__icon}
-            alt="menu"
-            width={24}
-            height={24}
+            alt={HEADER_CONSTANTS.MOBILE.MENU.ALT}
+            width={HEADER_CONSTANTS.MOBILE.MENU.WIDTH}
+            height={HEADER_CONSTANTS.MOBILE.MENU.HEIGHT}
           />
         </button>
       )}

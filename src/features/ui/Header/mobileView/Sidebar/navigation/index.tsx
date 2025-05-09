@@ -2,6 +2,7 @@
 
 import { UserInfo } from '../types';
 import styles from './index.module.scss';
+import { HEADER_CONSTANTS } from '@/features/ui/Header/constants';
 
 interface SidebarNavProps extends UserInfo {
   onNavigate: (path: string) => void;
@@ -18,23 +19,25 @@ export default function Navigation({
       {!userId && (
         <button
           className={styles.nav__login}
-          onClick={() => onNavigate('/auth')}
+          onClick={() => onNavigate(HEADER_CONSTANTS.PATHS.AUTH)}
         >
-          로그인
+          {HEADER_CONSTANTS.TEXT.LOGIN}
         </button>
       )}
       {userId && (
         <button
           onClick={() => {
-            if (window.confirm('로그아웃 하시겠습니까?')) {
+            if (window.confirm(HEADER_CONSTANTS.TEXT.POPUP.LOGOUT_CONFIRM)) {
               onLogout();
             }
           }}
         >
-          로그아웃
+          {HEADER_CONSTANTS.TEXT.POPUP.LOGOUT}
         </button>
       )}
-      <button onClick={() => onNavigate('/')}>커뮤니티</button>
+      <button onClick={() => onNavigate(HEADER_CONSTANTS.PATHS.HOME)}>
+        {HEADER_CONSTANTS.TEXT.NAVIGATION.COMMUNITY}
+      </button>
     </nav>
   );
 }
