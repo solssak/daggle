@@ -23,7 +23,7 @@ export default function Navigation({
           로그인
         </button>
       )}
-      <button onClick={() => onNavigate('/')}>홈</button>
+      <button onClick={() => onNavigate('/')}>커뮤니티</button>
       {userId && (
         <button
           onClick={() => {
