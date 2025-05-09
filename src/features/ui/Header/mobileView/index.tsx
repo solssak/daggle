@@ -113,6 +113,7 @@ export default function MobileView({
         >
           <Image
             src="/images/icons/hamburger.svg"
+            className={styles.header__container__hamburger__icon}
             alt="menu"
             width={24}
             height={24}

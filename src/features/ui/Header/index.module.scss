@@ -34,6 +34,10 @@
         cursor: pointer;
       }
 
+      &__icon {
+        cursor: pointer;
+      }
+
       @include respond-to-mobile {
         display: block;
         @include typography(H1-XS);
