@@ -64,6 +64,7 @@ export default function CommunityPostList() {
   }, [inView, data?.meta, isLoading, isLoadingMore]);
 
   const handlePageChange = (newPage: number) => {
+    if (newPage === page) return;
     setPage(newPage);
     setAllItems([]);
   };
