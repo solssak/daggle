@@ -23,7 +23,6 @@ export default function Navigation({
           로그인
         </button>
       )}
-      <button onClick={() => onNavigate('/')}>커뮤니티</button>
       {userId && (
         <button
           onClick={() => {
@@ -35,6 +34,7 @@ export default function Navigation({
           로그아웃
         </button>
       )}
+      <button onClick={() => onNavigate('/')}>커뮤니티</button>
     </nav>
   );
 }
