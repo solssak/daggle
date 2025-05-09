@@ -65,6 +65,21 @@ export const COMMUNITY_LIST_CONSTANTS = {
     },
     PAGINATION: {
       LIMIT: 10,
+      VISIBLE_PAGES: 5,
+      ARROW: {
+        LEFT: {
+          SRC: '/images/community-list/arrow-left.svg',
+          ALT: '이전 페이지',
+          WIDTH: 16,
+          HEIGHT: 16,
+        },
+        RIGHT: {
+          SRC: '/images/community-list/arrow-right.svg',
+          ALT: '다음 페이지',
+          WIDTH: 16,
+          HEIGHT: 16,
+        },
+      },
     },
   },
 } as const;
