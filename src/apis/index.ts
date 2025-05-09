@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 import { API_URL } from '@/constants/env';
 
 export const apiCaller: AxiosInstance = axios.create({
@@ -38,19 +38,34 @@ apiCaller.interceptors.response.use(
           });
 
           const { accessToken, refreshToken: newRefreshToken } = res.data;
+
+          const currentState = userStorage ? JSON.parse(userStorage).state : {};
           localStorage.setItem(
             'user-storage',
             JSON.stringify({
-              accessToken,
-              refreshToken: newRefreshToken,
+              state: {
+                ...currentState,
+                accessToken,
+                refreshToken: newRefreshToken,
+              },
             }),
           );
 
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          originalRequest.headers = {
+            ...originalRequest.headers,
+            Authorization: `Bearer ${accessToken}`,
+          };
           return apiCaller(originalRequest);
         } catch (refreshError) {
-          localStorage.removeItem('user-storage');
-          window.location.href = '/login';
+          if (
+            refreshError instanceof AxiosError &&
+            refreshError.response?.status === 401
+          ) {
+            localStorage.removeItem('user-storage');
+            window.location.href = '/login';
+          } else {
+            console.error('123123:', refreshError);
+          }
         }
       }
     }
