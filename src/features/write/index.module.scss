@@ -1,0 +1,41 @@
+.container {
+  background-color: #f9fafa;
+  min-height: 100vh;
+  padding: 24px 120px;
+
+  @include respond-to-tablet {
+    padding: 24px 30px;
+  }
+
+  @include respond-to-mobile {
+    padding: 0 16px;
+    background-color: #fff;
+  }
+
+  &__wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 24px 24px 24px 24px;
+    background-color: #fff;
+    border: 1px solid #eeeff1;
+    border-radius: 16px;
+
+    @include respond-to-mobile {
+      padding: 0;
+      border: none;
+    }
+
+    &__title {
+      @include typography(H1-R);
+      margin-bottom: 24px;
+    }
+
+    &__form {
+      @include typography(Body-2);
+    }
+  }
+
+  &__button {
+    margin: 28px auto 0 auto;
+  }
+}

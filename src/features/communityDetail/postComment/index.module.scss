@@ -1,0 +1,117 @@
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+
+  &__comment {
+    padding: 24px 24px;
+    background-color: #f9fafa;
+    border: 1px solid #eeeff1;
+    border-top: none;
+
+    @include respond-to-mobile {
+      padding: 16px;
+    }
+
+    @include typography(Body-2);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__username {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &__actions {
+      display: flex;
+      gap: 12px;
+
+      &__edit,
+      &__delete,
+      &__save,
+      &__cancel {
+        @include typography(Body-2);
+        color: #a7a9b4;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+
+        @include respond-to-mobile {
+          @include typography(Body-3);
+        }
+      }
+    }
+
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__editTextarea {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px;
+      border: 1px solid #eeeff1;
+      border-radius: 4px;
+      resize: none;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: 1.5;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__createdAt {
+      color: #a7a9b4;
+      @include typography(Body-2);
+
+      @include respond-to-mobile {
+        @include typography(Body-3);
+      }
+    }
+  }
+
+  &__write {
+    border-radius: 0 0 12px 12px;
+    border: 1px solid #eeeff1;
+    padding: 24px 24px;
+    background-color: #ffffff;
+    border-top: none;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    @include respond-to-mobile {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 25.5px 16px;
+      gap: 0;
+    }
+
+    &__textarea {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #eeeff1;
+      resize: none;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::placeholder {
+        color: #a7a9b4;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}

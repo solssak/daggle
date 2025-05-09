@@ -1,0 +1,46 @@
+.container {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 32px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  @include respond-to-mobile {
+    box-shadow: none;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px;
+
+    @include respond-to-mobile {
+      padding: 16px 0;
+    }
+
+    &__title {
+      @include typography(H1-M);
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__writeButton {
+    position: fixed;
+    bottom: 50px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #6025e1;
+    color: #fff;
+    box-shadow: 0 4px rgba(159, 159, 159, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+  }
+}
