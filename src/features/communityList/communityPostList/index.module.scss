@@ -26,4 +26,21 @@
   &__list {
     list-style: none;
   }
+
+  &__writeButton {
+    position: fixed;
+    bottom: 50px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #6025e1;
+    color: #fff;
+    box-shadow: 0 4px rgba(159, 159, 159, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+  }
 }
