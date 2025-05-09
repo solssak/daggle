@@ -61,5 +61,15 @@
     font-weight: 400;
     line-height: 150%;
     letter-spacing: -0.3%;
+  } @else if $type == Body-3 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.3%;
+  } @else if $type == Caption {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: -0.3%;
   }
 }
