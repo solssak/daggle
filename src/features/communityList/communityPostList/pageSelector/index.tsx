@@ -3,23 +3,33 @@
 import Image from 'next/image';
 import { memo, useMemo } from 'react';
 import styles from './index.module.scss';
+import { COMMUNITY_LIST_CONSTANTS } from '../../constants';
+
 interface PageSelectorProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
 }
 
-const VISIBLE_PAGES = 5;
-
 function PageSelector({
   currentPage,
   totalPages,
   onPageChange,
 }: PageSelectorProps) {
-  // 페이지 번호 배열 생성 (현재 페이지 기준으로 보여줄 페이지 수)
   const pageNumbers = useMemo(() => {
-    const startPage = Math.max(1, currentPage - Math.floor(VISIBLE_PAGES / 2));
-    const endPage = Math.min(totalPages, startPage + VISIBLE_PAGES - 1);
+    const startPage = Math.max(
+      1,
+      currentPage -
+        Math.floor(
+          COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.VISIBLE_PAGES / 2,
+        ),
+    );
+    const endPage = Math.min(
+      totalPages,
+      startPage +
+        COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.VISIBLE_PAGES -
+        1,
+    );
 
     return Array.from(
       { length: endPage - startPage + 1 },
@@ -28,17 +38,18 @@ function PageSelector({
   }, [currentPage, totalPages]);
 
   return (
-    <nav className={styles.pagination} aria-label="페이지 네비게이션">
+    <nav className={styles.pagination}>
       <button
         className={styles.pagination__button}
         onClick={() => onPageChange(currentPage - 1)}
-        aria-label="이전 페이지"
       >
         <Image
-          src="/images/community-list/arrow-left.svg"
-          alt="이전 페이지"
-          width={16}
-          height={16}
+          src={COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.LEFT.SRC}
+          alt={COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.LEFT.ALT}
+          width={COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.LEFT.WIDTH}
+          height={
+            COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.LEFT.HEIGHT
+          }
         />
       </button>
       {pageNumbers.map((pageNumber) => (
@@ -58,13 +69,16 @@ function PageSelector({
       <button
         className={styles.pagination__button}
         onClick={() => onPageChange(currentPage + 1)}
-        aria-label="다음 페이지"
       >
         <Image
-          src="/images/community-list/arrow-right.svg"
-          alt="다음 페이지"
-          width={16}
-          height={16}
+          src={COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.RIGHT.SRC}
+          alt={COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.RIGHT.ALT}
+          width={
+            COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.RIGHT.WIDTH
+          }
+          height={
+            COMMUNITY_LIST_CONSTANTS.POST_LIST.PAGINATION.ARROW.RIGHT.HEIGHT
+          }
         />
       </button>
     </nav>
