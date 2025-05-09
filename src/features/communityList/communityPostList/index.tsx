@@ -13,11 +13,19 @@ import CommunityPostMobile from './communityPost/communityPostMobile';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 
+interface CommunityPostItem {
+  id: string;
+  title: string;
+  createdAt: string;
+  commentCount: number;
+  isAuthor: boolean;
+}
+
 export default function CommunityPostList() {
   const router = useRouter();
 
   const [page, setPage] = useState<number>(1);
-  const [allItems, setAllItems] = useState<any[]>([]);
+  const [allItems, setAllItems] = useState<CommunityPostItem[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const limit = 10;

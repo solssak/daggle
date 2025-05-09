@@ -1,9 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
 import { apiCaller } from '@/apis';
 
-export async function patch<T, F = unknown>(
+export async function patch<T, P = unknown, F = unknown>(
   path: string,
-  payload?: any,
+  payload?: P,
   params?: AxiosRequestConfig<F>,
 ) {
   try {
